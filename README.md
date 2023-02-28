@@ -73,8 +73,8 @@ To add a new event, you can create a new file in the `events` folder inside the 
 import { Events } from "discord.js";
 
 export default {
-    event: Events.ClientReady,
-    once: true,
+    event: Events.ClientReady, /* This object exports an event listener for the Discord.js 'ClientReady' event. */
+    once: true, /* The 'once' property is set to true, indicating that the event listener should only be executed once. */
     async execute() {
         console.log('ready');
     }
