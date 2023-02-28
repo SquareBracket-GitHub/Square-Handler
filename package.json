@@ -12,7 +12,7 @@
     "dev": "nodemon .",
     "deployCommands": "node src/deployCommands.js"
   },
-  "author": "Team SquareBracket",
+  "author": "Team Pixel Punk",
   "license": "ISC",
   "description": ""
 }
