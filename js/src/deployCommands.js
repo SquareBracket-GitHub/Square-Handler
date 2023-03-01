@@ -9,9 +9,9 @@ const commandsFiles = fs
   .filter((file) => file.endsWith(".js"));
 
 commandsFiles.forEach(async file => {
-  const command = await import(`./commands/${file}`);
+  const command = require(`./commands/${file}`);
 
-  commands.push(command.default.data);
+  commands.push(command.data);
 });
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
