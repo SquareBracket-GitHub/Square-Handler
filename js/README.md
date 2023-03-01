@@ -1,4 +1,4 @@
-# Get Started
+# Get Started (JS)
 ## Step 1: Downloading npms.
 After downloading the engine, please install the required npm packages used by the engine. The following are the npm packages used by the engine:
 + Discord.js: `npm i discord.js`
