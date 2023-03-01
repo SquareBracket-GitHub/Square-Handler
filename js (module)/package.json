@@ -4,7 +4,7 @@
     "nodemon": "^2.0.20"
   },
   "type": "module",
-  "name": "square_engine",
+  "name": "square_handler",
   "version": "1.0.0",
   "main": "src/bot.js",
   "scripts": {
