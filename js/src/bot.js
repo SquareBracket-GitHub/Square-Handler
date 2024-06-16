@@ -1,8 +1,8 @@
-const { Client } = require("discord.js");
-const { TOKEN, INTENTS } = require("../configs/config.js");
+const { Client, IntentsBitField } = require("discord.js");
 const fs = require("fs");
+require('dotenv').config();
 
-const client = new Client({ intents: INTENTS });
+const client = new Client({ intents: [] });
 
 const eventFolders = fs.readdirSync('./src/events').filter((file) => file.endsWith(".js"));
 eventFolders.forEach(async file => {
@@ -14,4 +14,4 @@ eventFolders.forEach(async file => {
     }
 })
 
-client.login(TOKEN);
+client.login(process.env.TOKEN);

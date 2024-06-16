@@ -1,10 +1,9 @@
-import { Client } from 'discord.js';
-import config from '../configs/config.js';
+import { Client, IntentsBitField } from 'discord.js';
 import fs from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const { TOKEN, INTENTS } = config;
-
-const client = new Client({ intents: INTENTS });
+const client = new Client({ intents: [] });
 
 const eventFolders = fs.readdirSync('./src/events').filter((file) => file.endsWith(".js"));
 eventFolders.forEach(async file => {
@@ -16,4 +15,4 @@ eventFolders.forEach(async file => {
     }
 })
 
-client.login(TOKEN);
+client.login(process.env.TOKEN);

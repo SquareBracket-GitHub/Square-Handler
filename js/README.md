@@ -1,32 +1,26 @@
 # Get Started (JS)
 ## Step 1: Downloading npms.
-After downloading the engine, please install the required npm packages used by the engine. The following are the npm packages used by the engine:
+After downloading the handler, please install the required npm packages used by the handler. The following are the npm packages used by the handler:
 + Discord.js: `npm i discord.js`
++ Dotenv: `npm i dotenv`
 + Nodemon: `npm i nodemon`
 
 However, since both of these npm packages are included in the **package.json** file, you can download both of them at once by running `npm i`.
 
 ## Step 2: Setting Environment Variables
-Now we need some minimal information for the bot to function properly. All the information about the bot is in the `config.js` file located in the `configs` folder.
-### Config.js:
-```js
-const { GatewayIntentBits } = require("discord.js");
-
-const config = {
-    TOKEN: 'token', /* The bot token used by Discord.js */
-    CLIENT_ID: 'client id', /* The client ID of the bot */
-    INTENTS: [], /* Intents used by the bot */
-    COMMAND_MODE: 'GUILD', /* Mode in which the bot's commands will be executed (GUILD or GLOBAL) */
-    TEST_GUILD: 'test guild', /* ID of the server used for testing */
-}
-
-module.exports = config;
+Now we need some minimal information for the bot to function properly. In this handler, We are going to use **dotenv** to set environment variables. So we should generate a `dotenv` file in the directory.
+### .env:
+```
+TOKEN=token
+CLIENT_ID=client-id
+COMMAND_MODE=GUILD
+GUILD_ID=guild-id
 ```
 + **TOKEN:** You will need your **Discord bot token** here. As this is a very important piece of information, **do not use it in any other code**.
 + **CLIENT_ID:** You will need your client ID here, which is the **ID of your bot**.
-+ **INTENTS:** You will put multiple INTENTs in this array, using GatewayIntentBits.
+<!-- + **INTENTS:** You will put multiple INTENTs in this array, using GatewayIntentBits. -->
 + **COMMAND_MODE:** You can set the type of commands your bot will use here. COMMAND_MODE is divided into `GUILD` and `GLOBAL` modes. If you set the mode to `GUILD`, the slash commands can only be used in the designated guild. If you set it to `GLOBAL`, the slash commands will be applied to all servers, but it may take some time.
-+ **TEST_GUILD:** If you set COMMAND_MODE to `GUILD`, please write a **guild ID** here. The bot's commands will be applied to that guild.
++ **GUILD_ID:** If you set COMMAND_MODE to `GUILD`, please write a **guild ID** here. The bot's commands will be applied in that guild.
 
 #### As this file contains very important information about your bot, do not upload it to a public space.
 
@@ -35,6 +29,19 @@ module.exports = config;
 + To delete or add commands, you can update the commands using `npm run deployCommands`. If this is your first time running the bot, please use this command first.
 
 # Additional Help
+
+## Setting Intents
+When developing your bot, you have to set your bot's intents. By setting the intents, your bot can do more functions that it couldn't do in the past. The intents can be set in `bot.js`.
+### bot.js:
+```js
+const { Client } = require("discord.js");
+const fs = require("fs");
+require('dotenv').config();
+
+const client = new Client({ intents: [/*Type the intents here*/] });
+
+...
+```
 
 ## Creating Command Files
 To add a new command, you can create a new file in the `commands` folder inside the `src` folder.
@@ -79,7 +86,7 @@ The `once` field specifies whether the event should only be executed once. For e
 
 The `execute` function will be executed when the specified event is detected.
 
-#### Do not modify the `InteractionCreate` file that is included in the engine by default. This could cause commands and buttons to not work properly.
+#### Do not modify the `InteractionCreate` file that is included in the handler by default. This could cause commands and buttons to not work properly.
 
 ## Creating Button Files
 To add a new button, you can create a new file in the `buttons` folder inside the `src` folder.

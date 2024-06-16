@@ -1,9 +1,9 @@
 import { REST, Routes } from 'discord.js';
-import config from '../configs/config.js'
 import fs from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 let commands = [];
-const { TOKEN, COMMAND_MODE, TEST_GUILD, CLIENT_ID } = config;
 
 const commandsFiles = fs
   .readdirSync('./src/commands')
@@ -15,17 +15,17 @@ commandsFiles.forEach(async file => {
   commands.push(command.default.data);
 });
 
-const rest = new REST({ version: '10' }).setToken(TOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 (async () => {
   try {
     console.log('Started refreshing application (/) commands.');
 
-    if (COMMAND_MODE === 'GLOBAL') {
-      await rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands });
-    } else if (COMMAND_MODE === 'GUILD') {
-      await rest.put(Routes.applicationCommands(CLIENT_ID), { body: {} })
-      await rest.put(Routes.applicationGuildCommands(CLIENT_ID, TEST_GUILD), { body: commands });
+    if (process.env.COMMAND_MODE === 'GLOBAL') {
+      await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands });
+    } else if (process.env.COMMAND_MODE === 'GUILD') {
+      await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: {} })
+      await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), { body: commands });
     }
 
     console.log('Successfully reloaded application (/) commands.');
